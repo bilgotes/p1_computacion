@@ -1,0 +1,52 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+<!-- HTML Codes by Quackit.com -->
+<title>
+meneame analyzer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {background-color:#fb661c;background-repeat:no-repeat;background-position:top left;background-attachment:fixed;}
+h1{font-family:Arial, sans-serif;font-variant:small-caps;color:#000000;background-color:#0e0808;}
+p {font-family:Georgia, serif;font-size:14px;font-style:normal;font-weight:normal;color:#000000;background-color:#ffffff;}
+</style>
+</head>
+<body>
+<h1>Ultima entrada</h1>
+<p>
+<table>
+{%for element in entradas %}
+        <tr>
+                <td> Titulo </td>
+                <td> Meneos </td>
+                <td> Clics </td>
+        </tr>
+        <tr>
+                <td>{{ element['titulo'] }}</td>
+                <td>{{ element['meneos'] }}</td>
+                <td>{{ element['clics'] }}</td>
+        </tr>
+{% endfor %}
+</table>
+<form action="/my-handling-form-page" method="post">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" />
+    </div>
+    <div>
+        <label for="mail">E-mail:</label>
+        <input type="email" id="mail" />
+    </div>
+    <div>
+        <label for="msg">Message:</label>
+        <textarea id="msg"></textarea>
+    </div>
+    
+    <div class="button">
+        <button type="submit">Send your message</button>
+    </div>
+</form>
+</body>
+</html>
+

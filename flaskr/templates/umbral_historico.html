@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>Umbral historico</h1>
+{% endblock %}
+{% block subheader %}
+  <h2>Máximo 10 entradas</h2>
+{% endblock %}
+{% block header_content %}
+<button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+{% endblock %}
+{% block content_head %}
+<h1>Entradas con más de {{umbral}} clics</h1>
+{%endblock%}
+{% block content %}
+<p>
+<table cellspacing="10">
+        <tr>
+		<td><h3> Entrada </h3></td>
+                <td><h3> Titulo </h3></td>
+                <td><h3> Meneos </h3></td>
+		<td><h3> Clics </h3></td>
+		</tr>
+	{% for elem in entradas%}
+        <tr>
+                <td>{{ elem['ts'] }}</td>
+                <td>{{ elem['titulo'] }}</td>
+                <td>{{ elem['meneos'] }}</td>
+                <td>{{ elem['clics'] }}</td>
+        </tr>
+	{% endfor %}
+</table>
+{%endblock%}
+{% block formulario %}
+  <form action={{ url_for('umbral_historico') }} method="post">
+                <label for="umbral">Umbral histórico: </label>
+                <input name="umbral" id="umbral" size="4">
+                <input type="submit" value="Enviar"> <br>
+        </form><br>
+        <form action={{ url_for('valor_medio') }} method="post">
+                <input type="submit" value="Valor Medio">
+        </form>
+{% endblock %}
+

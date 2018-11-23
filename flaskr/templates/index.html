@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>Inicio</h1>
+{% endblock %}
+{% block subheader %}
+  <h2>Bienvenid@</h2>
+{% endblock %}
+{% block header_content %}
+<button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+{% endblock %}
+{% block content_head %}
+<h1>Ultima entrada</h1>
+{%endblock%}
+{% block content %}
+<p>
+<table cellspacing="10">
+        <tr>
+                <td><h3> Titulo </h3></td>
+		<td><h3> Meneos </h3></td>
+                <td><h3> Clics </h3></td>
+        </tr>
+        <tr>
+                <td>{{ entradas.get('titulo') }}</td>
+                <td>{{ entradas['meneos'] }}</td>
+                <td>{{ entradas['clics'] }}</td>
+        </tr>
+</table>
+{%endblock%}
+{% block formulario %}
+  <form action={{ url_for('umbral_historico') }} method="post">
+                <label for="umbral">Umbral histórico: </label>
+                <input name="umbral" id="umbral" size="4">
+                <input type="submit" value="Enviar"> <br>
+        </form><br>
+        <form action={{ url_for('valor_medio') }} method="post">
+                <input type="submit" value="Valor Medio">
+        </form>
+{% endblock %}
+

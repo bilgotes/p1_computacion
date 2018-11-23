@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>Gráficos ThingSpeak</h1>
+{% endblock %}
+{% block subheader %}
+  <h2>Servidos desde thingspeak.com</h2>
+{% endblock %}
+{% block header_content %}
+<button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
+{% endblock %}
+{% block content_head %}
+<h1>Data Collection Dashboard</h1>
+{%endblock%}
+{% block content %}
+<table>
+	<tr>
+		<td>
+		<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/622234/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+		</td>
+		<td>
+		<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/622234/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+		</td>
+	</tr>
+</table>
+{% endblock %}
+
