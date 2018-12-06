@@ -6,9 +6,10 @@ from flask import json
 from flask import g
 from flask import request
 from flask import make_response
+from pymongo import monitoring
 import urllib2 as ul
 
-# añadir event listener para mongoDB
+# anadir event listener para mongoDB
 class ServerLogger(monitoring.ServerListener):
 
     def opened(self, event):
@@ -32,7 +33,6 @@ class ServerLogger(monitoring.ServerListener):
 
 app = Flask(__name__)
 
-
 # Local database connection parameters
 db_host = "localhost"
 db_port = "27017"
@@ -53,15 +53,27 @@ def dashboard():
 @app.route('/umbral_historico', methods=['POST','GET'])
 def umbral_historico():
     selected = []
-    umbral = int(request.form['umbral'])
-    for elem in getLastN():
-	if int(elem['clics']) > umbral and not any(d['titulo'] == elem['titulo'] for d in selected):
-		selected.append(elem)
-		if len(selected) == 10:
-			break
-    return render_template('umbral_historico.html',umbral=umbral,entradas=selected)
+    if request.method == 'POST':
+    	try:
+		umbral = int(request.form['umbral'])
+		for elem in getLastN():
+			if int(elem['clics']) > umbral and not any(d['titulo'] == elem['titulo'] for d in selected):
+				selected.append(elem)
+				if len(selected) == 10:
+					break
+	except: 
+		umbral = ''	
+    	return render_template('umbral_historico.html',umbral=umbral,entradas=selected)
+    else:
+    	umbral = 0
+	for elem in getLastN():
+		if int(elem['clics']) > umbral and not any(d['titulo'] == elem['titulo'] for d in selected):
+			selected.append(elem)
+			if len(selected) == 10:
+				break
+    	return render_template('umbral_historico.html',umbral=umbral,entradas=selected)
 
-@app.route('/valor_medio', methods=['POST','GET'])
+@app.route('/valor_medio')
 def valor_medio():
     acumulado=0
     media = 0
@@ -81,7 +93,7 @@ def valor_medio():
 			pass
 	media = acumulado / counter
 	resp = make_response(render_template('valor_medio.html',database=database,media=media,counter=counter))
-    	resp.set_cookie('bd','',expires=0)
+    	resp.set_cookie('bd','',expires=10)
     else :
 	database="Local"
 	curs_entr = getLastN()
@@ -101,8 +113,8 @@ def getLastN():
 def get_db():
     db = getattr(g, '_database', None)	# devuelve el valor del atributo _database de g. Si no existe devuelve None para escapar de la excepcion y crear una conexion
     if db is None:
-        #db = g._database = MongoClient("mongodb://%s:%s/" %(db_host,db_port))
-        db = g._database = MongoClient("mongodb://%s:%s/" %(db_host,db_port),event_listeners=[ServerLogger()])
+        db = g._database = MongoClient("mongodb://%s:%s/" %(db_host,db_port))
+ #       db = g._database = MongoClient("mongodb://%s:%s/" %(db_host,db_port),event_listeners=[ServerLogger()])
     return db
 
 @app.teardown_appcontext
@@ -111,5 +123,6 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-if __name__ == '__main__':
-    app.run(debug=True)	
+#if __name__ == '__main__':
+#    app.run(debug=True)	# En desarrollo
+#    app.run(host="192.168.42.126")	# Accesible desde otro host	

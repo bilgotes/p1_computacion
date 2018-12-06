@@ -2,10 +2,7 @@
 
 import urllib2 as ul
 from lxml import html
-import csv
-import numpy as np
 from pymongo import MongoClient
-import time
 import datetime
 
 website="https://www.meneame.net"

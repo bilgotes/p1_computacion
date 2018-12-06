@@ -10,7 +10,13 @@
 <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
 {% endblock %}
 {% block content_head %}
-<h1>Entradas con más de {{umbral}} clics</h1>
+<h1>
+{% if umbral != '' %}
+Entradas con más de {{umbral}} clics 
+{% else %}
+ Introduzca umbral válido
+{% endif %}
+</h1>
 {%endblock%}
 {% block content %}
 <p>
@@ -37,7 +43,7 @@
                 <input name="umbral" id="umbral" size="4">
                 <input type="submit" value="Enviar"> <br>
         </form><br>
-        <form action={{ url_for('valor_medio') }} method="post">
+        <form action={{ url_for('valor_medio') }} >
                 <input type="submit" value="Valor Medio">
         </form>
 {% endblock %}
