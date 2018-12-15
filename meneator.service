@@ -1,0 +1,16 @@
+[Unit]
+Description=cer_webapp
+After=network.target
+
+[Service]
+Type=simple
+# Another Type option: forking
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/nanodano
+ExecStart=/usr/bin/sudo /home
+Restart=on-failure
+# Other Restart options: or always, on-abort, etc
+
+[Install]
+WantedBy=multi-user.target
