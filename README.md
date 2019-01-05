@@ -1,6 +1,16 @@
 # p1_computacion
 Practica 1 de computacion en red
 
+_______ v.2.0 _________
+- Eliminado instalacion de virtualenv en script de instalacion
+- Cambio dinamico de propietario en lugar de fijo en la linea 7 del script de instalacion
+- Añadido al script de instalacion las ordenes sed para que cabie el usuario de los demonios acorde a la maquina destino, los copie al path de systemd y los active.
+- Se cambian los demonios para que sed pueda cambiar $USER por el usuario real de la maquina.
+- Se elimina el fichero mongod.conf del path principal. Queda en mongo_files/conf/.
+- Se añade esta descripción.
+- Se modifica el código de recolector.py para comentar los prints.
+- Se modifica mongod.config para que no genere un fork y esté preparado para entrar en set de replicación.
+
 +++++++ Instalación +++++++++
 Ejecutar el script install.sh
 
