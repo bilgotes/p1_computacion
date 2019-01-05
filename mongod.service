@@ -7,7 +7,7 @@ Type=simple
 # Another Type option: forking
 User=$USER
 WorkingDirectory=/home/ubuntu/p1_computacion/flaskr
-ExecStart=mongod --config /etc/mongod.conf 
+ExecStart=/usr/bin/mongod --config /etc/mongod.conf 
 Restart=on-failure
 # Other Restart options: or always, on-abort, etc
 

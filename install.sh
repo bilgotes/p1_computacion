@@ -5,11 +5,14 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 sudo cp mongo_files/conf/mongod.conf /etc/mongod.conf
 sudo chown $USER /etc/mongod.conf
+sudo chown -R $USER /var/log/mongodb/
+sudo chown -R $USER /var/lib/mongodb/
 mongod --config /etc/mongod.conf
 mongoimport --db p1 --collection meneos --file mongo_files/db/meneos.json
 (crontab -l 2>/dev/null; echo "*/2 * * * * $PWD/recolector.py") | crontab -
 sudo apt-get install python-pip
 pip install -r requirements.txt
+sudo apt-get install gunicorn
 sed -i 's/$USER/'$USER'/g' meneawebapp.service
 sed -i 's/$USER/'$USER'/g' mongod.service
 sudo cp *.service /lib/systemd/system/
