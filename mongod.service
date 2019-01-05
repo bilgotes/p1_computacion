@@ -5,8 +5,7 @@ After=network.target
 [Service]
 Type=simple
 # Another Type option: forking
-User=ubuntu
-Group=ubuntu
+User=$USER
 WorkingDirectory=/home/ubuntu/p1_computacion/flaskr
 ExecStart=mongod --config /etc/mongod.conf 
 Restart=on-failure

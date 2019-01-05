@@ -9,7 +9,7 @@ website="https://www.meneame.net"
 ts_api_key="51QQO7K0Q533P5FC"
 baseURL = 'http://api.thingspeak.com/update?api_key=%s' % ts_api_key
 
-print baseURL
+#print baseURL
 
 
 # abre el socket al website
@@ -28,7 +28,7 @@ titulo = titulo[0]
 titulo_ascii = titulo.encode('ascii','ignore')
 meneos = int(meneos[0])
 clics = int(clics[0].replace('clics',''))
-print titulo
+#print titulo
 
 pym = MongoClient("mongodb://localhost:27017/")
 pymdb = pym["p1"]

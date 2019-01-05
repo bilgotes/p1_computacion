@@ -5,8 +5,7 @@ After=network.target
 [Service]
 Type=simple
 # Another Type option: forking
-User=ubuntu
-Group=ubuntu
+User=$USER
 WorkingDirectory=/home/ubuntu/p1_computacion/flaskr
 ExecStart=/usr/bin/sudo /usr/bin/gunicorn -b=0.0.0.0:80 app:app 
 Restart=on-failure
